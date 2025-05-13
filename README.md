@@ -76,6 +76,33 @@ npm run dev
 
 3. Open your browser and navigate to `http://localhost:8000`
 
+## Deployment
+
+### Backend Deployment (Render)
+
+1. Create a new Web Service on Render
+2. Connect your GitHub repository
+3. Use the following settings:
+   - **Name**: chatzone-backend (or your preferred name)
+   - **Runtime**: Node
+   - **Build Command**: `cd backend && npm install && npm run build`
+   - **Start Command**: `cd backend && npm start`
+   - **Environment Variables**:
+     - `NODE_ENV`: production
+     - `PORT`: 10000 (or your preferred port)
+
+### Frontend Deployment (Vercel)
+
+1. Create a new project on Vercel
+2. Connect your GitHub repository
+3. Use the following settings:
+   - **Framework Preset**: Vite
+   - **Root Directory**: frontend
+   - **Build Command**: npm run build
+   - **Output Directory**: dist
+   - **Environment Variables**:
+     - `VITE_WS_URL`: wss://your-backend-url.onrender.com (replace with your actual Render backend URL)
+
 ## License
 
 This project is licensed under the MIT License.

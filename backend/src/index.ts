@@ -1,6 +1,24 @@
 import { WebSocketServer, WebSocket } from "ws";
+import * as http from "http";
 
-const wss = new WebSocketServer({ port: 8080 });
+// Use environment variables with fallbacks
+const PORT = process.env.PORT || 8080;
+
+// Create HTTP server
+const server = http.createServer((req, res) => {
+    // Simple health check endpoint
+    if (req.url === '/health') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 'ok', timestamp: new Date().toISOString() }));
+        return;
+    }
+
+    res.writeHead(404);
+    res.end();
+});
+
+// Create WebSocket server using the HTTP server
+const wss = new WebSocketServer({ server });
 
 interface User {
     socket: WebSocket,
@@ -169,4 +187,9 @@ wss.on('connection', (socket: WebSocket) => {
             allSocket = allSocket.filter(user => user.socket !== socket);
         }
     });
+});
+
+// Start the server
+server.listen(PORT, () => {
+    console.log(`WebSocket server is running on port ${PORT}`);
 });

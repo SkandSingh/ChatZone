@@ -62,9 +62,19 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const connectWebSocket = () => {
     if (ws.current?.readyState === WebSocket.OPEN) return;
 
-    // Create WebSocket connection using the proxy
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host}/ws`;
+    // Get WebSocket URL from environment variables or use the proxy in development
+    let wsUrl: string;
+
+    if (import.meta.env.PROD && import.meta.env.VITE_WS_URL) {
+      // Use the environment variable in production
+      wsUrl = import.meta.env.VITE_WS_URL;
+    } else {
+      // Use the proxy in development
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      wsUrl = `${protocol}//${window.location.host}/ws`;
+    }
+
+    console.log(`Connecting to WebSocket at: ${wsUrl}`);
     ws.current = new WebSocket(wsUrl);
 
     // Connection opened
