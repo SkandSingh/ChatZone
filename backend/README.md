@@ -29,6 +29,18 @@ WebSocket server for the ChatZone real-time chat application.
 npm install
 ```
 
+## Deployment on Glitch.com
+
+1. Create a new project on Glitch.com
+2. Import your repository or upload the backend files
+3. The server will automatically start using the start script in package.json
+4. Note the URL provided by Glitch.com (will be used in the frontend configuration)
+
+### Environment Variables on Glitch.com
+
+Add the following environment variables in your Glitch.com project settings:
+- `PORT`: This will be automatically set by Glitch
+
 ### Running the Server
 
 Start the development server:

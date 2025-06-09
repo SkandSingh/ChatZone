@@ -7,17 +7,22 @@
     "start": "node dist/index.js",
     "dev": "tsc -w & nodemon dist/index.js",
     "build": "tsc",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "test-client": "node src/test-client.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "@types/ws": "^8.18.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "ws": "^8.18.2"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "nodemon": "^3.0.0"
+    "nodemon": "^3.0.0",
+    "typescript": "^5.0.0"
   }
-} 
+}

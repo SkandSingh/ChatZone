@@ -2,7 +2,8 @@
 import React from "react";
 import Auth from "@/components/Auth";
 import ChatRoom from "@/components/ChatRoom";
-import { ChatProvider, useChat } from "@/context/ChatContext";
+import { ChatProvider } from "@/context/ChatContext";
+import { useChat } from "@/hooks/use-chat";
 
 const ChatApp: React.FC = () => {
   const { isConnected } = useChat();

@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Message } from "../context/ChatContext";
+import { Message } from "../context/ChatContextDefinition";
 import { formatDistance } from "date-fns";
 
 interface MessageBubbleProps {

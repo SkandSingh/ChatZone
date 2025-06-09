@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
-import { useChat } from "../context/ChatContext";
+import { useChat } from "@/hooks/use-chat";
 import MessageBubble from "./MessageBubble";
 import TypingIndicator from "./TypingIndicator";
 import { Button } from "@/components/ui/button";

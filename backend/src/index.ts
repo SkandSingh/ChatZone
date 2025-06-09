@@ -1,6 +1,25 @@
 import { WebSocketServer, WebSocket } from "ws";
+import http from "http";
+import cors from "cors";
+import express from "express";
 
-const wss = new WebSocketServer({ port: 8080 });
+// Create Express app for handling HTTP
+const app = express();
+app.use(cors());
+
+// Add a health check endpoint
+app.get('/', (req, res) => {
+  res.json({ status: 'ChatZone WebSocket Server is running' });
+});
+
+// Create HTTP server
+const server = http.createServer(app);
+
+// Use environment variable for port or default to 8080
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 8080;
+
+// Create WebSocket server using the HTTP server
+const wss = new WebSocketServer({ server });
 
 interface User {
     socket: WebSocket,
@@ -40,13 +59,10 @@ wss.on('connection', (socket: WebSocket) => {
                 });
 
                 try {
-                    // Send confirmation to the user who joined
-                    socket.send(JSON.stringify({
+                        socket.send(JSON.stringify({
                         text: `You joined room ${parsedData.payload.roomId}`,
                         sender: "System"
                     }));
-
-                    // Notify other users in the room about the new user
                     const joinMessage = JSON.stringify({
                         text: `${parsedData.payload.username} has joined the room`,
                         sender: "System"
@@ -169,4 +185,9 @@ wss.on('connection', (socket: WebSocket) => {
             allSocket = allSocket.filter(user => user.socket !== socket);
         }
     });
+});
+
+// Start the server
+server.listen(PORT, () => {
+    console.log(`WebSocket server is running on port ${PORT}`);
 });
