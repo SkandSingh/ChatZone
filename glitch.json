@@ -1,0 +1,17 @@
+{
+  "install": "cd backend && npm install",
+  "start": "cd backend && npm run build && npm start",
+  "watch": {
+    "install": {
+      "include": [
+        "backend/package\\.json$"
+      ]
+    },
+    "restart": {
+      "include": [
+        "backend/dist/"
+      ]
+    },
+    "throttle": 1000
+  }
+}
