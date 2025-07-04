@@ -1,7 +1,8 @@
 
 import React, { useState, ReactNode, useRef, useEffect } from "react";
-import { toast } from "@/components/ui/sonner";
-import { ChatContext, ChatContextType, Message } from "./ChatContextDefinition";
+
+import { toast } from "sonner";
+import { ChatContext, Message } from "./ChatContextDefinition";
 
 interface WSMessage {
   text: string;
